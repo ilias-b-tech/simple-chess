@@ -1,0 +1,113 @@
+.chess-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  width: fit-content;
+  border: 8px solid #654321;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.board-row {
+  display: flex;
+}
+
+.square {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.square.light {
+  background-color: #f0d9b5;
+}
+
+.square.dark {
+  background-color: #b58863;
+}
+
+.square.highlighted {
+  background-color: rgba(144, 238, 144, 0.6);
+}
+
+.square.selected {
+  background-color: rgba(255, 255, 0, 0.4);
+}
+
+.square.checked {
+  background-color: rgba(255, 0, 0, 0.3);
+}
+
+.chess-piece {
+  font-size: 40px;
+  user-select: none;
+  transition: transform 0.2s;
+}
+
+.chess-piece:hover {
+  transform: scale(1.1);
+}
+
+.chess-piece.white {
+  color: #fff;
+  text-shadow: 0 0 2px #000;
+}
+
+.chess-piece.black {
+  color: #000;
+  text-shadow: 0 0 2px #fff;
+}
+
+.current-player {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+  text-transform: capitalize;
+  padding: 10px;
+  background-color: #f0d9b5;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.game-status {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+  text-transform: capitalize;
+  padding: 10px;
+  background-color: #f0d9b5;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.game-status.check {
+  background-color: #ffcccc;
+  color: #cc0000;
+  animation: pulse 1s infinite;
+}
+
+.game-status.checkmate {
+  background-color: #4a4a4a;
+  color: #ffffff;
+  animation: none;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+} 
