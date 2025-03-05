@@ -2,17 +2,21 @@
   text-align: center;
   min-height: 100vh;
   background-color: #282c34;
-  padding: 20px;
+  padding: min(20px, 4vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .App-header {
-  margin-bottom: 30px;
+  margin-bottom: min(30px, 6vw);
+  width: 100%;
 }
 
 .App-header h1 {
   color: white;
   margin: 0;
-  font-size: 2.5em;
+  font-size: min(2.5em, 8vw);
   font-family: 'Arial', sans-serif;
 }
 
@@ -20,8 +24,10 @@ main {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 20px;
-} 
+  padding: min(20px, 4vw);
+  width: 100%;
+  max-width: 800px;
+}
 
 .App-logo {
     height: 40vmin;
@@ -57,4 +63,19 @@ main {
       transform: rotate(360deg);
     }
   }
+  
+/* Add viewport meta tag for proper mobile scaling */
+@media screen and (max-width: 480px) {
+  .App {
+    padding: 10px;
+  }
+
+  .App-header {
+    margin-bottom: 15px;
+  }
+
+  main {
+    padding: 10px;
+  }
+}
   

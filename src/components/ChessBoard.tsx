@@ -11,6 +11,19 @@ const ChessBoard: React.FC = () => {
   const [currentPlayer, setCurrentPlayer] = useState<'white' | 'black'>('white');
   const [isInCheck, setIsInCheck] = useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [touchStartTime, setTouchStartTime] = useState<number>(0);
+
+  useEffect(() => {
+    // Add viewport meta tag for mobile
+    const meta = document.createElement('meta');
+    meta.name = 'viewport';
+    meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+    document.head.appendChild(meta);
+
+    return () => {
+      document.head.removeChild(meta);
+    };
+  }, []);
 
   useEffect(() => {
     // Check for check and checkmate after each move
@@ -64,6 +77,21 @@ const ChessBoard: React.FC = () => {
     setValidMoves([]);
   };
 
+  const handleTouchStart = (e: React.TouchEvent, x: number, y: number) => {
+    e.preventDefault();
+    setTouchStartTime(Date.now());
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent, x: number, y: number) => {
+    e.preventDefault();
+    const touchDuration = Date.now() - touchStartTime;
+    
+    // Only process tap if touch duration is less than 500ms
+    if (touchDuration < 500) {
+      handleSquareClick(x, y);
+    }
+  };
+
   const isSquareHighlighted = (x: number, y: number): boolean => {
     return validMoves.some(move => move.x === x && move.y === y);
   };
@@ -99,6 +127,8 @@ const ChessBoard: React.FC = () => {
                           ${isSelected ? 'selected' : ''}
                           ${isKingChecked ? 'checked' : ''}`}
                 onClick={() => handleSquareClick(x, y)}
+                onTouchStart={(e) => handleTouchStart(e, x, y)}
+                onTouchEnd={(e) => handleTouchEnd(e, x, y)}
               >
                 {piece && <ChessPiece piece={piece} />}
               </div>
